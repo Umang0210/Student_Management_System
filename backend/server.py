@@ -393,15 +393,16 @@ async def delete_student(student_id: str, current_user: dict = Depends(get_curre
 app.include_router(api_router)
 
 # CORS
-# Allow both localhost (dev) and any Vercel deployment (prod)
+# Allow both localhost (dev) and Vercel deployments (prod)
 allowed_origins = [
     'http://localhost:3000',
     'http://localhost:8000',
     'https://localhost:3000',
-    os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:3000'),
+    'https://student-management-system-six-tawny.vercel.app',
+    os.environ.get('FRONTEND_URL', ''),  # For future deployments
 ]
-# Also allow any *.vercel.app domain for flexibility
-allowed_origins.extend(['https://*.vercel.app'])
+# Remove empty strings
+allowed_origins = [url for url in allowed_origins if url]
 
 app.add_middleware(
     CORSMiddleware,
