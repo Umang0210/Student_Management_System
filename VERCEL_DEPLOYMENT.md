@@ -94,8 +94,10 @@ Once Vercel deployment is complete and you have your project URL:
 ### 4.1 Update `.env.production`
 Edit `frontend/.env.production`:
 ```
-REACT_APP_BACKEND_URL=https://your-project-name.vercel.app/api
+REACT_APP_BACKEND_URL=https://your-project-name.vercel.app
 ```
+
+⚠️ **Important:** Use only the base URL WITHOUT `/api` suffix. The frontend code automatically appends `/api` to API endpoints.
 
 Replace `your-project-name` with your actual Vercel project name.
 
