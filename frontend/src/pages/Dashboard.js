@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -57,11 +57,7 @@ const Dashboard = () => {
 
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-  useEffect(() => {
-    fetchStudents();
-  }, [currentPage, searchTerm, statusFilter]);
-
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     setLoading(true);
     try {
       const params = {
@@ -85,7 +81,11 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [BACKEND_URL, currentPage, searchTerm, statusFilter, limit]);
+
+  useEffect(() => {
+    fetchStudents();
+  }, [fetchStudents]);
 
   const handleAddStudent = async (e) => {
     e.preventDefault();
