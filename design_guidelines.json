@@ -1,0 +1,88 @@
+{
+  "theme": "light",
+  "archetype": "4 (Swiss & High-Contrast)",
+  "design_philosophy": "Clean, modern, and minimal. Focus on functional components, removing unnecessary elements. Information hierarchy using subtle borders and structured grids.",
+  "colors": {
+    "background": "#FFFFFF",
+    "surface": "#FAFAFA",
+    "border": "#E5E5E5",
+    "text_primary": "#0A0A0A",
+    "text_secondary": "#525252",
+    "primary_action": "#000000",
+    "primary_action_hover": "#333333",
+    "destructive": "#EF4444",
+    "destructive_hover": "#DC2626",
+    "success": "#10B981"
+  },
+  "typography": {
+    "heading_font": "Satoshi, sans-serif",
+    "body_font": "IBM Plex Sans, sans-serif",
+    "scale": {
+      "h1": "text-4xl tracking-tight font-bold",
+      "h2": "text-2xl tracking-tight font-semibold",
+      "h3": "text-xl font-medium",
+      "body": "text-sm leading-relaxed",
+      "small": "text-xs text-secondary uppercase tracking-widest"
+    }
+  },
+  "spacing_and_layout": {
+    "container_padding": "p-8",
+    "gap_large": "gap-8",
+    "gap_medium": "gap-6",
+    "gap_small": "gap-4",
+    "border_radius": "rounded-lg",
+    "card_style": "bg-white border border-gray-200 shadow-sm"
+  },
+  "components": {
+    "button": "rounded-md px-4 py-2 text-sm font-medium transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-black",
+    "table": "w-full text-sm text-left border-collapse",
+    "table_header": "bg-gray-50 border-b border-gray-200 text-gray-500 font-medium py-3 px-4",
+    "table_cell": "py-4 px-4 border-b border-gray-100",
+    "input": "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black",
+    "modal_overlay": "backdrop-blur-sm bg-black/40",
+    "modal_content": "bg-white rounded-lg shadow-xl border border-gray-200 p-6"
+  },
+  "pages": {
+    "login": {
+      "layout": "grid grid-cols-1 md:grid-cols-2 min-h-screen",
+      "left_panel": "hidden md:block bg-gray-100 relative overflow-hidden",
+      "right_panel": "flex items-center justify-center p-8 bg-white",
+      "form_container": "w-full max-w-sm space-y-6"
+    },
+    "dashboard": {
+      "layout": "min-h-screen bg-[#FAFAFA]",
+      "header": "bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center sticky top-0 z-50",
+      "content": "max-w-7xl mx-auto p-8",
+      "table_container": "bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden mt-6"
+    }
+  },
+  "media": {
+    "login_background": {
+      "url": "https://images.unsplash.com/photo-1610496571096-8367bdbbae2b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwyfHxtaW5pbWFsaXN0JTIwd2hpdGUlMjBhcmNoaXRlY3R1cmUlMjBhYnN0cmFjdHxlbnwwfHx8fDE3NzYxODg5MDJ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Minimalist white architecture abstract - used for the login page split screen background"
+    },
+    "placeholder_avatar": {
+      "url": "https://ui-avatars.com/api/?name=Admin&background=random",
+      "description": "Fallback avatar for admin profile"
+    }
+  },
+  "icons": {
+    "library": "lucide-react",
+    "usage": "Use stroke-width='1.5' for a cleaner, modern look"
+  },
+  "accessibility_and_testing": {
+    "focus_states": "All interactive elements must have clear focus rings (e.g., focus:ring-2 focus:ring-black focus:outline-none)",
+    "test_ids": "Mandatory data-testid attributes for forms, inputs, buttons, and table rows (e.g., data-testid='login-email-input')"
+  },
+  "instructions_to_main_agent": [
+    "Use Shadcn UI components for Tables, Forms, Inputs, Dialogs (modals for add/edit/delete), and Pagination.",
+    "Implement a minimalist top navbar or sidebar for the admin layout.",
+    "Ensure table rows have a subtle hover state (hover:bg-gray-50).",
+    "Use the color palette strictly. Primary actions are black/dark gray for a stark 'Swiss' high-contrast look.",
+    "Data table should include Search (text input) and Filter (status dropdown) in the header section above the table.",
+    "Forms for Add/Edit should ideally be displayed within Shadcn Dialog components to avoid page navigations, keeping the flow fast.",
+    "Include a confirmation Dialog (AlertDialog from Shadcn) before deleting a student.",
+    "Toast notifications (Sonner) must be used for success/error messages upon CRUD operations.",
+    "Add 'data-testid' to all key elements for testing."
+  ]
+}
