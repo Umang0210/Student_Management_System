@@ -1,0 +1,17 @@
+{
+  "buildCommand": "echo 'Build complete'",
+  "outputDirectory": "frontend/build",
+  "installCommand": "npm install --prefix frontend && pip install -r backend/requirements.txt",
+  "env": {
+    "MONGO_URL": "@mongo_url",
+    "DB_NAME": "@db_name",
+    "ADMIN_EMAIL": "@admin_email",
+    "ADMIN_PASSWORD": "@admin_password",
+    "JWT_SECRET": "@jwt_secret"
+  },
+  "functions": {
+    "backend/**": {
+      "runtime": "python3.11"
+    }
+  }
+}

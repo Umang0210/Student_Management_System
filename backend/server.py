@@ -210,24 +210,29 @@ async def login(credentials: LoginRequest, response: Response):
     access_token = create_access_token(user_id, email_lower)
     refresh_token = create_refresh_token(user_id)
     
+    # Determine if secure cookies (production has HTTPS, localhost doesn't)
+    is_production = os.environ.get('VERCEL_ENV') == 'production'
+    
     # Set cookies
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=False,
-        samesite="lax",
+        secure=is_production,
+        samesite="lax" if not is_production else "strict",
         max_age=900,
-        path="/"
+        path="/",
+        domain=None
     )
     response.set_cookie(
         key="refresh_token",
         value=refresh_token,
         httponly=True,
-        secure=False,
-        samesite="lax",
+        secure=is_production,
+        samesite="lax" if not is_production else "strict",
         max_age=604800,
-        path="/"
+        path="/",
+        domain=None
     )
     
     return {
@@ -388,9 +393,13 @@ async def delete_student(student_id: str, current_user: dict = Depends(get_curre
 app.include_router(api_router)
 
 # CORS
+backend_url = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:3000')
+# Extract frontend URL from backend URL (e.g., https://myproject.vercel.app)
+frontend_url = backend_url.replace('/api', '') if '/api' in backend_url else 'http://localhost:3000'
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:3000')],
+    allow_origins=[frontend_url, 'http://localhost:3000'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
