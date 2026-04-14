@@ -15,7 +15,6 @@ from typing import List, Optional
 from datetime import datetime, timezone, timedelta
 import bcrypt
 import jwt
-import secrets
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -423,31 +422,6 @@ async def startup_event():
             {"email": admin_email},
             {"$set": {"password_hash": hash_password(admin_password)}}
         )
-    
-    # Write test credentials
-    import pathlib
-    creds_path = pathlib.Path("/app/memory/test_credentials.md")
-    creds_path.parent.mkdir(parents=True, exist_ok=True)
-    creds_path.write_text(f"""# Test Credentials
-
-## Admin Account
-- Email: {admin_email}
-- Password: {admin_password}
-- Role: admin
-
-## Auth Endpoints
-- POST /api/auth/register
-- POST /api/auth/login
-- POST /api/auth/logout
-- GET /api/auth/me
-
-## Student Endpoints
-- POST /api/students
-- GET /api/students
-- GET /api/students/:id
-- PUT /api/students/:id
-- DELETE /api/students/:id
-""")
 
 # Configure logging
 logging.basicConfig(
