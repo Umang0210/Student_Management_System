@@ -393,13 +393,19 @@ async def delete_student(student_id: str, current_user: dict = Depends(get_curre
 app.include_router(api_router)
 
 # CORS
-backend_url = os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:3000')
-# Extract frontend URL from backend URL (e.g., https://myproject.vercel.app)
-frontend_url = backend_url.replace('/api', '') if '/api' in backend_url else 'http://localhost:3000'
+# Allow both localhost (dev) and any Vercel deployment (prod)
+allowed_origins = [
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'https://localhost:3000',
+    os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:3000'),
+]
+# Also allow any *.vercel.app domain for flexibility
+allowed_origins.extend(['https://*.vercel.app'])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url, 'http://localhost:3000'],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
