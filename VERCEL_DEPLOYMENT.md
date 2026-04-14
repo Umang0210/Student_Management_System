@@ -37,10 +37,11 @@ Your entire MERN app (frontend + backend) will be deployed on **Vercel**.
 ### 1.5 Get Connection String
 1. Go to **Databases** → Your cluster → Click **Connect**
 2. Choose "Drivers"
-3. Copy the connection string (looks like: `mongodb+srv://admin:password@cluster.mongodb.net/`)
-4. Replace `<password>` with your db user password
-5. Replace `/` at the end with `/student_hub` (database name)
-6. **Save this string** - you'll need it for Vercel
+3. Copy the connection string (looks like: `mongodb+srv://<username>:<password>@cluster.mongodb.net/`)
+4. Replace `<username>` with your database user name
+5. Replace `<password>` with your database user password
+6. Replace `/` at the end with `/student_hub` (database name)
+7. **Save this string securely** - you'll need it for Vercel (never commit to git)
 
 ---
 
